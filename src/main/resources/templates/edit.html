@@ -39,29 +39,8 @@
 			</div>
 			<div class="panel-body">
 				<p>Choose a team:</p>
-				<form action="edit" class="col-md-12">
-					<table class="table table-hover table-bordered"
-						style="font-family: monospace;">
-						<tr>
-							<th>Full Name</th>
-							<th>City</th>
-							<th>State</th>
-							<th>Division</th>
-							<th></th>
-						</tr>						
-						<tr th:each="team: ${teams}">
-							<td th:text="${team.fullName}"></td>
-							<td th:text="${team.city}"></td>
-							<td th:text="${team.state}"></td>
-							<td th:text="${team.division}"></td>
-							<td class="text-center"><input type="radio" name="id"
-								th:value="${team.teamId}"></td>
-						</tr>
-					</table>
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</div>
-				</form>
+				<span 
+								th:text="${team.teamId}"></span>
 			</div>
 		</div>
 

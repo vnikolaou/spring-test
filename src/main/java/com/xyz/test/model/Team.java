@@ -1,16 +1,20 @@
 package com.xyz.test.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name="team")
+@Table(name="teams")
 public class Team implements Serializable {
 	private static final long serialVersionUID = -2612450541546351851L;
 	@Id
@@ -42,6 +46,10 @@ public class Team implements Serializable {
 	@Column(name="full_name")	
 	private String fullName;
 
+	@JsonIgnore
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="team")
+	private Collection<Player> players;
+	
 	public String getTeamId() {
 		return teamId;
 	}
@@ -120,6 +128,21 @@ public class Team implements Serializable {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+
+	public Collection<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Collection<Player> players) {
+		this.players = players;
+	}
+
+	@Override
+	public String toString() {
+		return "Team [teamId=" + teamId + ", abbreviation=" + abbreviation + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", conference=" + conference + ", division=" + division + ", siteName=" + siteName
+				+ ", city=" + city + ", state=" + state + ", fullName=" + fullName + "]";
 	}
 		
 }

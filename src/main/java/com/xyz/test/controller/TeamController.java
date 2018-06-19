@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xyz.test.model.Team;
 import com.xyz.test.service.TeamService;
@@ -16,7 +17,7 @@ public class TeamController {
 	@Autowired
 	private TeamService teamService;
 	
-    @RequestMapping(path = {"/", "/home"}, method = RequestMethod.GET)
+    @RequestMapping(path={"/", "/home"}, method = RequestMethod.GET)
     public String home(Model model) {
     	List<Team> teams = teamService.findTeams();
     	model.addAttribute("teams", teams);
@@ -24,4 +25,13 @@ public class TeamController {
         return "home";
     }
 
+    @RequestMapping(path="/edit", method = RequestMethod.GET)
+    public String edit(@RequestParam("id") String id, Model model) {
+    	System.out.println("finding for id=" + id);
+    	Team team = teamService.findTeamById(id);
+    	System.out.println(team.toString());
+    	model.addAttribute("team", team);
+    	
+        return "edit";
+    }
 }
