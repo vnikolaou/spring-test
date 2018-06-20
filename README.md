@@ -17,7 +17,7 @@ git clone  https://github.com/vnikolaou/spring-test.git
 ## Run
 Type:
 ````
-cd ~/projects/test
+cd ~/projects/test/spring-test
 mvn spring-boot:run
 ````
 
