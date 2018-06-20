@@ -54,27 +54,20 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public Team findTeamById(String id) {
 		Team team = teamRepository.findById(id).orElse(null);
-		if(team.getPlayers() != null && !team.getPlayers().isEmpty()) {
-			System.out.println("size=" + team.getPlayers().size());
-			team.getPlayers().forEach(t -> {
-				System.out.println("got t= " + t);
-			});
-			
-		} else {
-			System.out.println("adding new player");
-			Player player = new Player();
-			player.setFullName("fullName");
-			player.setHeight(200);
-			player.setPhone("111111111");
-			addPlayer(id, player);
-		}
+		if(team != null) team.getPlayers();
+		
 		return team;
 	}
 
 	@Override
 	@Transactional
-	public void addPlayer(String teamId, final Player player) {
+	public void addPlayer(String teamId, String fullName, String phone, Integer height) {
 		Team team = teamRepository.findById(teamId).get();
+		
+		Player player = new Player();
+		player.setFullName(fullName);
+		player.setPhone(phone);
+		player.setHeight(height);
 		player.setTeam(team);
 		
 		playerRepository.save(player);
