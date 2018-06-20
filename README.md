@@ -21,3 +21,8 @@ cd ~/projects/test/spring-test
 mvn spring-boot:run
 ````
 
+Then open a browser and type:
+
+````
+http://localhost:8080
+````
